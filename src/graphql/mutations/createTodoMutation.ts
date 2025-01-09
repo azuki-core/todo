@@ -9,9 +9,11 @@ export const createTodoMutation = (t: ObjectDefinitionBlock<'Mutation'>) => {
       title: nonNull(stringArg()),
     },
     resolve: async (_, arguments_, ctx) => {
-      const todo = await ctx.todo.create({
-        title,
-        done: false,
+      const todo = await ctx.prisma.todo.create({
+        data: {
+          title: title,
+          done: false,
+        },
       })
 
       return todo

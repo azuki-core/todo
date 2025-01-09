@@ -3,13 +3,10 @@ import { idArg, list, nonNull, type ObjectDefinitionBlock } from 'nexus/dist/cor
 export const TodosQuery = (t: ObjectDefinitionBlock<'Query'>) => {
   t.nonNull.field('todos', {
     type: list(nonNull('Todo')),
-    args: {
-      organizationId: nonNull(idArg()),
-    },
     resolve: async (_, __, ctx) => {
-      const todos = await ctx.todos.findMany({
+      const todos = await ctx.prisma.todo.findMany({
         orderBy: {
-          rank: 'updatedAt',
+          updatedAt: 'desc',
         },
       })
 

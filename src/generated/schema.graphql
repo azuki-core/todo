@@ -9,18 +9,18 @@ scalar DateTime
 
 type Mutation {
   createTodo(title: String!): Todo
-  deleteTodo(id: ID!): Todo
-  updateTodo(done: Boolean!, id: ID!): Todo
+  deleteTodo(id: Int!): Todo
+  updateTodo(done: Boolean!, id: Int!): Todo
 }
 
 type Query {
-  todos(organizationId: ID!): [Todo!]!
+  todos: [Todo!]!
 }
 
 type Todo {
   createdAt: DateTime!
   done: Boolean
-  id: ID!
+  id: Int!
   title: String!
   updatedAt: DateTime!
 }

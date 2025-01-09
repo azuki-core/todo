@@ -49,7 +49,7 @@ export interface NexusGenObjects {
   Todo: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     done?: boolean | null; // Boolean
-    id: string; // ID!
+    id: number; // Int!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -77,7 +77,7 @@ export interface NexusGenFieldTypes {
   Todo: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     done: boolean | null; // Boolean
-    id: string; // ID!
+    id: number; // Int!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -95,7 +95,7 @@ export interface NexusGenFieldTypeNames {
   Todo: { // field return type name
     createdAt: 'DateTime'
     done: 'Boolean'
-    id: 'ID'
+    id: 'Int'
     title: 'String'
     updatedAt: 'DateTime'
   }
@@ -107,16 +107,11 @@ export interface NexusGenArgTypes {
       title: string; // String!
     }
     deleteTodo: { // args
-      id: string; // ID!
+      id: number; // Int!
     }
     updateTodo: { // args
       done: boolean; // Boolean!
-      id: string; // ID!
-    }
-  }
-  Query: {
-    todos: { // args
-      organizationId: string; // ID!
+      id: number; // Int!
     }
   }
 }
