@@ -76,3 +76,8 @@ export type UpdateTodoMutationVariables = Exact<{
 
 
 export type UpdateTodoMutation = { __typename?: 'Mutation', updateTodo?: { __typename?: 'Todo', id: number, title: string, updatedAt: string } | null };
+
+export type FetchTodoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchTodoQuery = { __typename?: 'Query', todos: Array<{ __typename?: 'Todo', id: number, title: string, updatedAt: string }> };
