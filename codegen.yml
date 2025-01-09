@@ -1,12 +1,10 @@
-schema: './src/graphql/schema.graphql'
-documents: ['src/graphql/query/*.graphql']
+schema: './src/generated/schema.graphql'
+documents: ['src/graphql-client/**/*.graphql']
 generates:
-  ./src/graphql/types/apollo.ts:
+  ./src/generated/apollo.ts:
     config:
       scalars:
         DateTime: string
     plugins:
       - 'typescript'
       - 'typescript-operations'
-      - 'typescript-react-apollo'
-      - 'typescript-resolvers'
