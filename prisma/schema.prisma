@@ -13,17 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Task {
+// model Task {
+//   id          Int      @id @default(autoincrement())
+//   title       String   @db.VarChar(100)
+//   done        Boolean  @default(false)
+//   createdAt   DateTime @default(now()) @map(name: "created_at")
+//   updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+//   @@map(name: "tasks")
+// }
+
+// model User {
+//   id   Int @id @default(autoincrement())
+//   name String
+// }
+
+
+model Todo {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(100)
   done        Boolean  @default(false)
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
-  @@map(name: "tasks")
-}
-
-model User {
-  id   Int @id @default(autoincrement())
-  name String
+  @@map(name: "todo")
 }

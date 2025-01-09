@@ -4,9 +4,24 @@
  */
 
 
-
-
-
+import type { Context } from "./../graphql/context"
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    datetime<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    datetime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+  }
+}
 
 
 declare global {
@@ -25,10 +40,19 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: Date
 }
 
 export interface NexusGenObjects {
+  Mutation: {};
   Query: {};
+  Todo: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    done?: boolean | null; // Boolean
+    id: string; // ID!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -42,18 +66,59 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    createTodo: NexusGenRootTypes['Todo'] | null; // Todo
+    deleteTodo: NexusGenRootTypes['Todo'] | null; // Todo
+    updateTodo: NexusGenRootTypes['Todo'] | null; // Todo
+  }
   Query: { // field return type
-    hello: string | null; // String
+    todos: NexusGenRootTypes['Todo'][]; // [Todo!]!
+  }
+  Todo: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    done: boolean | null; // Boolean
+    id: string; // ID!
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Mutation: { // field return type name
+    createTodo: 'Todo'
+    deleteTodo: 'Todo'
+    updateTodo: 'Todo'
+  }
   Query: { // field return type name
-    hello: 'String'
+    todos: 'Todo'
+  }
+  Todo: { // field return type name
+    createdAt: 'DateTime'
+    done: 'Boolean'
+    id: 'ID'
+    title: 'String'
+    updatedAt: 'DateTime'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createTodo: { // args
+      title: string; // String!
+    }
+    deleteTodo: { // args
+      id: string; // ID!
+    }
+    updateTodo: { // args
+      done: boolean; // Boolean!
+      id: string; // ID!
+    }
+  }
+  Query: {
+    todos: { // args
+      organizationId: string; // ID!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -87,7 +152,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
