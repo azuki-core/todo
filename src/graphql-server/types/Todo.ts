@@ -5,7 +5,7 @@ export const Todo = objectType({
   definition(t) {
     t.nonNull.int('id')
     t.nonNull.string('title')
-    t.boolean('done')
+    t.nonNull.boolean('done')
     t.nonNull.field('createdAt', { type: 'DateTime' })
     t.nonNull.field('updatedAt', { type: 'DateTime' })
   },

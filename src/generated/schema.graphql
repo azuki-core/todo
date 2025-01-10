@@ -19,7 +19,7 @@ type Query {
 
 type Todo {
   createdAt: DateTime!
-  done: Boolean
+  done: Boolean!
   id: Int!
   title: String!
   updatedAt: DateTime!

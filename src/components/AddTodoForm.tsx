@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { CreateTodoDocument } from '@/generated/apollo'
+import { CreateTodoDocument, FetchTodoDocument } from '@/generated/apollo'
 const AddTodoForm = () => {
   const [title, setTitle] = useState('')
-  const [createTodo, { data, loading, error }] = useMutation(CreateTodoDocument)
-
+  const [createTodo, { data, loading, error }] = useMutation(CreateTodoDocument, {
+    refetchQueries: [{ query: FetchTodoDocument }],
+  })
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
@@ -22,13 +23,17 @@ const AddTodoForm = () => {
         placeholder="Enter todo title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        className="border px-4 py-2"
         required
       />
-      <button type="submit" disabled={loading}>
+      <button
+        type="submit"
+        disabled={loading}
+        className="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-blue-300"
+      >
         {loading ? 'Adding...' : 'Add Todo'}
       </button>
       {error && <p>Error: {error.message}</p>}
-      {data && <p>Todo added: {data.createTodo?.title}</p>}
     </form>
   )
 }
