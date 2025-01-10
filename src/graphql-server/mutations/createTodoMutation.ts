@@ -1,6 +1,5 @@
 import { arg, idArg, nonNull, nullable, stringArg } from 'nexus'
 import type { ObjectDefinitionBlock } from 'nexus/dist/core'
-import { title } from 'process'
 
 export const createTodoMutation = (t: ObjectDefinitionBlock<'Mutation'>) => {
   t.nullable.field('createTodo', {
@@ -11,7 +10,7 @@ export const createTodoMutation = (t: ObjectDefinitionBlock<'Mutation'>) => {
     resolve: async (_, arguments_, ctx) => {
       const todo = await ctx.prisma.todo.create({
         data: {
-          title: title,
+          title: arguments_.title,
           done: false,
         },
       })

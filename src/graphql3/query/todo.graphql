@@ -1,8 +1,0 @@
-query GetTodos {
-  todo {
-    id
-    title
-    done
-    updatedAt
-  }
-}

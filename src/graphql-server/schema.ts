@@ -12,7 +12,7 @@
 //   }
 // `
 import path from 'node:path'
-
+import { join } from 'path'
 import { makeSchema } from 'nexus'
 import { DateTimeScalar } from './scalars/DateTimeScalar'
 import { Todo } from './types/Todo'
@@ -28,6 +28,7 @@ export const schema = makeSchema({
   },
   contextType: {
     export: 'Context',
-    module: path.join(__dirname, 'context.ts'),
+    // module: path.join(__dirname, 'context.ts'),
+    module: join(process.cwd(), 'src', 'graphql-server', 'context.ts'),
   },
 })
